@@ -67,11 +67,11 @@ B = [
   [ 0, 0, 1,0 ],
   [1,2,3,0]
 ]
-start = time.time()
-print (multiplyNormal(A,B))
-stop = time.time()
-print ((stop-start))
-start = time.time()
-print (multiply(A,B))
-stop = time.time()
-print ((stop-start))
+#start = time.time()
+#print (multiplyNormal(A,B))
+#stop = time.time()
+#print ((stop-start))
+#start = time.time()
+#print (multiply(A,B))
+#stop = time.time()
+#print ((stop-start))
