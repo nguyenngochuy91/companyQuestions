@@ -9,7 +9,18 @@ import random
 #Given an array of integers and an integer k, you need to find the total number
 # of continuous subarrays whose sum equals to k.
 def subarraySum( nums, k) -> int:
+    d= {0:1}
     count = 0
+    current =0
+    for num in nums:
+        current+=num
+        val = current-k
+        if val in d:
+            count+=d[val]
+        if current not in d:
+            d[current]=0
+        d[current]+=1
+        
     return count
 
 def generateTest(n):
