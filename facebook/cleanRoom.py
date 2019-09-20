@@ -15,11 +15,15 @@ Created on Fri Sep 20 11:48:03 2019
 #When it tries to move into a blocked cell, its bumper sensor detects the obstacle and it stays on the current cell.
 #
 #Design an algorithm to clean the entire room using only the 4 given APIs shown below.
- """
+"""
  This is the robot's control interface.
  You should not implement it, or speculate about its implementation
- """
+"""
 class Robot:
+    def __init__(self,matrix,current,direction):
+        self.matrix = matrix
+        self.current = current
+        self.direction = direction
     def move(self):
         """
         Returns true if the cell in front is open and robot moves into the cell.
@@ -47,7 +51,7 @@ class Robot:
         :rtype void
         """
 
-def cleanRoom(self, robot):
+def cleanRoom(robot):
     """
     :type robot: Robot
     :rtype: None
