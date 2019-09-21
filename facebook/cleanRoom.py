@@ -96,13 +96,60 @@ def cleanRoom(robot:Robot):
     :type robot: Robot
     :rtype: None
     """
-    visited= ()
+    visited= set()
     visited.add((0,0))
-    notPossible = set()
+    # we clean the current cell
+    robot.clean()
     directions = [(0,1),(1,0),(0,-1),(-1,0)]
     currentIndex = 3
+    def proceed(currentCell,currentIndex):
+        x,y = currentCell
+        if robot.move():
+            # compute the cell cordinate
+            addX,addY = directions[currentIndex]
+            # check if this cell already fully visited
+            X,Y = x+addX,y+addY
+            newCell = (X,Y)
+#                print ("newCell",newCell)
+            if (X,Y) not in visited:
+                # we clean this tile
+                robot.clean()
+                dfs(newCell,currentIndex)
+                # after dfs, we have to go back ward for the robot
+                # we turn left twice and move
+            robot.turnLeft()
+            robot.turnLeft()
+            robot.move()
+            robot.turnLeft()
+            robot.turnLeft()
+                    # now we are back to our currentCell for our robot and with the same direction
+#        print (127,currentCell)
     # this is dfs, basically where we will traverse, keep track,clean the room
-    def dfs(currentCell,path,direction):
+    def dfs(currentCell,currentIndex):
         # we check all 4 cell around currentCell
-        return
-    return
+        # we will try to move away from our position 3 times
+        # move forward
+        visited.add(currentCell)
+        x,y = currentCell
+#        print (133,currentCell,robot.current)
+        for i in range(4):
+            proceed(currentCell,currentIndex)
+            currentIndex= (currentIndex+1)%4
+#            print (137,currentCell,robot.current)
+            robot.turnRight()
+#            if i==1:
+#                break
+
+        
+    dfs((0,0),currentIndex)
+    print (robot.matrix)
+#room =[[1,1,1],[1,1,1],[1,1,1]]
+room = [
+  [1,1,1,1,1,0,1,1],
+  [1,1,1,1,1,0,1,1],
+  [1,0,1,1,1,1,1,1],
+  [0,0,0,1,0,0,0,0],
+  [1,1,1,1,1,1,1,1]
+]
+robot =Robot(room,[2,2])
+cleanRoom(robot)
