@@ -8,13 +8,15 @@ Created on Sat Sep 21 15:39:41 2019
 #340. Longest Substring with At Most K Distinct Characters
 #Given a string, find the length of the longest substring T that contains at most k distinct characters.
 def lengthOfLongestSubstringKDistinct(s: str, k: int) -> int:
+    if k==0:
+        return 0
     output = 0
     d= {}
     start,stop = 0,0
     length = 0
     while stop<len(s):
         letter = s[stop]
-        print (d,start,stop)
+#        print (d,start,stop,length)
         if letter not in d:
             if len(d)<k:
                 d[letter]=1
@@ -31,11 +33,12 @@ def lengthOfLongestSubstringKDistinct(s: str, k: int) -> int:
                         d.pop(lastLetter)
                         break
                 d[letter]=1
+                length+=1
         else:
             length+=1
             d[letter]+=1
         stop+=1
     return max(output,length)
-s ="qtttqywywyiwiwieioqppppqqq"
-k = 3
+s ="a"
+k = 1
 print (lengthOfLongestSubstringKDistinct(s,k))
