@@ -16,6 +16,17 @@ class TreeNode:
         self.val = x
         self.left = None
         self.right = None
-def maxPathSum(self, root: TreeNode) -> int:
-    
-    return
+def maxPathSum(self,root: TreeNode) -> int:
+    self.max = -float("inf")
+    def dfs(node):
+        if not node:
+            return 0
+        else:
+            left = max(dfs(node.left),0)
+            right = max(dfs(node.right),0)
+            
+            throughNode = node.val+left+right
+            self.max    = max(self.max,throughNode)
+            return node.val+max(left,right)
+    dfs(root)
+    return self.max
