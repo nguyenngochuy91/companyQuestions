@@ -28,6 +28,3 @@ def mergerPointers(arr1,arr2):
         arr.append(arr2[i])
     return arr
 arr1,arr2=[1,3,6,17,21], [2,4,6,21]
-def mergerBST(arr1,arr2):
-    
-    return 

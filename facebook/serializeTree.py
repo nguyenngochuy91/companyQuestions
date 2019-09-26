@@ -12,7 +12,7 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
-class Codec:
+class CodecBFS:
     def serialize(self, root):
         """Encodes a tree to a single string.
         
@@ -72,19 +72,37 @@ class Codec:
             currentLevel = nextLevel
         return root
 
-a= TreeNode(1)
-b=TreeNode(2)
-c= TreeNode(3)
-d= TreeNode(4)
-e = TreeNode(5)
-f= TreeNode(6)
-g = TreeNode(7)
-a.left = b
-a.right = c
-b.left = d
-b.right = e
-e.left = f
-e.right= g
-serialize = Codec()
-data=serialize.serialize(a)
-root = serialize.deserialize(data)
+#a= TreeNode(1)
+#b=TreeNode(2)
+#c= TreeNode(3)
+#d= TreeNode(4)
+#e = TreeNode(5)
+#f= TreeNode(6)
+#g = TreeNode(7)
+#a.left = b
+#a.right = c
+#b.left = d
+#b.right = e
+#e.left = f
+#e.right= g
+#serialize = CodecBFS()
+#data=serialize.serialize(a)
+#root = serialize.deserialize(data)
+
+class Codec:
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+        
+        :type root: TreeNode
+        :rtype: str
+        """
+        
+        
+
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+        
+        :type data: str
+        :rtype: TreeNode
+        """
+        
