@@ -126,23 +126,41 @@ class CodecPreorder:
                 newNode.right  = right
                 return newNode,countL+countR+1
         return dfs(data,0)[0]
+    def deserializeIterator(self, data):
+        """Decodes your encoded data to tree.
         
-a= TreeNode(1)
-b=TreeNode(2)
-c= TreeNode(3)
-d= TreeNode(4)
-e = TreeNode(5)
-f= TreeNode(6)
-g = TreeNode(7)
-a.left = b
-a.right = c
-b.left = d
-b.right = e
-e.left = f
-e.right= g
-serialize = CodecPreorder()
-data=serialize.serialize(a)
-#root = serialize.deserialize(data)
+        :type data: str
+        :rtype: TreeNode
+        """
+        data= data.split(",")
+#        print (data)
+        def dfs(iterator):
+            val=next(iterator)
+            if val=="#":
+                return None
+            else:
+                val = int(val)
+                newNode = TreeNode(val)
+                newNode.left= dfs(iterator)
+                newNode.right= dfs(iterator)
+                return newNode
+        return dfs(iter(data))     
+#a= TreeNode(1)
+#b=TreeNode(2)
+#c= TreeNode(3)
+#d= TreeNode(4)
+#e = TreeNode(5)
+#f= TreeNode(6)
+#g = TreeNode(7)
+#a.left = b
+#a.right = c
+#b.left = d
+#b.right = e
+#e.left = f
+#e.right= g
+#serialize = CodecPreorder()
+#data=serialize.serialize(a)
+#root = serialize.deserializeIterator(data)
         
     
 #Approach 1C: DFS preorder with non-NULL number of children info
@@ -158,12 +176,15 @@ class CodecNotNull:
         def dfs(root):
             if root:
                 myList.append(str(root.val))
-                numleft = dfs(root.left)
-                numRight = dfs(root.right)
-                myList.append(str(numleft+numRight))
-                return 1
-            else:
-                return 0
+                num  = 0
+                if root.left:
+                    num+=1
+                if root.right:
+                    num+=1
+                myList.append(str(num))
+                dfs(root.left)
+                dfs(root.right)
+
         dfs(root)
         return ",".join(myList)
     def deserialize(self, data):
@@ -178,12 +199,36 @@ class CodecNotNull:
             nodeVal  = int(data[index])
             numChild = int(data[index+1])
             newNode = TreeNode(nodeVal)
+            leftNum,rightNum =0,0
+#            print (index,leftNum,rightNum)
             if numChild>=1:    
-                node.left    = dfs(data,index+2)
+                newNode.left,leftNum    = dfs(data,index+2)
             if numChild==2:
-                node.right   = dfs(data,)
-            return newNode
-        return dfs(data,0)
+                newNode.right,rightNum   = dfs(data,index+2+leftNum)
+#            print (index,leftNum,rightNum)
+            return newNode,leftNum+rightNum
+        return dfs(data,0)[0]
+    def deserializeIterator(self, data):
+        """Decodes your encoded data to tree.
+        
+        :type data: str
+        :rtype: TreeNode
+        """
+        data= data.split(",")
+#        print (data)
+        def dfs(iterator):
+            try:
+                nodeVal  = int(next(iterator))
+                numChild = int(next(iterator))
+                newNode = TreeNode(nodeVal)
+                if numChild>=1:    
+                    newNode.left    = dfs(iterator)
+                if numChild==2:
+                    newNode.right   = dfs(iterator)
+                return newNode
+            except:
+                return None
+        return dfs(iter(data))
 a= TreeNode(1)
 b=TreeNode(2)
 c= TreeNode(3)
@@ -199,3 +244,5 @@ e.left = f
 e.right= g
 serialize = CodecNotNull()
 data=serialize.serialize(a)
+root = serialize.deserialize(data)
+#print (serialize.serialize(root) ==data)
