@@ -18,44 +18,32 @@ A.left = C
 A.right = B
 C.left = D
 C.right= E
-#426. Convert Binary Search Tree to Sorted Doubly Linked List
+#426.     
 #Convert a BST to a sorted circular doubly-linked list in-place. Think of the left 
 #and right pointers as synonymous to the previous and next pointers in a doubly-linked list.\
 minNode = None
 maxNode = None
-def treeToDoublyList(root: 'Node') -> 'Node':
+def treeToDoublyList(self,root: 'Node') -> 'Node':
     if not root:
         return None
+    self.min,self.max = None,None
     def dfs(root):
         if root:
             dfs(root.left)
-            dfs(root.right)
-            if not root.left and not root.right:
-                root.min = root
-                root.max = root
-            elif root.left and root.right:
-                leftMax,leftMin = root.left.max,root.left.min
-                rightMax,rightMin = root.right.max,root.right.min
-                root.left = leftMax
-                leftMax.right = root
-                root.right = rightMin
-                rightMin.left = root
-                root.min = leftMin
-                root.max = rightMax
-            elif root.left:
-                leftMax,leftMin = root.left.max,root.left.min
-                leftMax.right= root
-                root.left = leftMax
-                root.min = leftMin
-                root.max = root
-            else:
-                rightMax,rightMin = root.right.max,root.right.min
-                root.right = rightMin
-                rightMin.left = root
-                root.min=root
-                root.max =rightMax
             # logic for root
+            if not self.max: # means that we hit the first root with val value, and we did not store our self.max as the last node yet, therefore, it is minimum
+                self.min = root
+            else:
+                # already have the last max, we can point it to our node, and node.left to max
+                root.left =self.max
+                self.max.right = root
+            # set our root to our max now
+            self.max = root
+            dfs(root.right)
     dfs(root)
+    self.min.left = self.max
+    self.max.right= self.min
+    return root
 treeToDoublyList(A)
     
     
