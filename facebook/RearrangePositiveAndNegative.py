@@ -26,4 +26,52 @@ array = [12 ,11, -13, -5, 6, -7, 5, -3, -6]
 #rearrangeSlow(array)
 #print (array)
 def rearrangeFast(array):
+    def dfs(start,stop):
+        if start<stop:
+            mid = (start+stop)//2
+#            print ("start:{},mid:{},stop:{}".format(start,mid,stop))
+            dfs(start,mid)
+            dfs(mid+1,stop)
+            # we find the first positive index and the end of it
+            leftPosStart = None
+            leftPosEnd   = None
+            for i in range(start,stop+1):
+                if array[i]>0:
+                    if leftPosStart==None:
+                        leftPosStart = i
+                    leftPosEnd   = i
+                # we hit negative, ,we check if lefposStart still is None, keep continue
+                else:
+                    if leftPosStart==None:
+                        continue
+                    else:
+                        break
+            rightPosStart = None
+            rightPosEnd   = None
+            if leftPosEnd!=None: # we find the first negative next to this
+                for i in range(min(leftPosEnd+1,stop),stop+1):
+                    if array[i]<0:
+                        if not rightPosStart:
+                            rightPosStart = i
+                        rightPosEnd=i
+                    else:
+                        break
+            if leftPosEnd!=None and rightPosStart!=None:
+                # we have LN LP RN RP
+                # reverse LP
+                reverseArr(array,leftPosStart,leftPosEnd)
+                # reverse RN
+                reverseArr(array,rightPosStart,rightPosEnd)
+                # reverse LP RN
+                reverseArr(array,leftPosStart,rightPosEnd)
+                
+        
+    dfs(0,len(array)-1)
     return
+def reverseArr(arr,start,stop):
+    while start<stop:
+#        print (start,stop)
+        arr[start],arr[stop]=arr[stop],arr[start]
+        start+=1
+        stop-=1
+rearrangeFast(array)

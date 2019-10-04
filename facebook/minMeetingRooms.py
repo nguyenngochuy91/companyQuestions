@@ -4,11 +4,12 @@ Created on Wed Sep 18 21:57:25 2019
 
 @author: huyn
 """
-import random
+import random,heapq
 #253. Meeting Rooms II
 #Given an array of meeting time intervals consisting of start and end times 
-#[[s1,e1],[s2,e2],...] (si < ei), find the minimum number of conference rooms required.
-def minMeetingRooms(intervals):
+#[[s1,e1],[s2,e2],...] (si < ei), find the minimum number of conference rooms required.\
+# O(N) space and O(N^2) times
+def minMeetingRoomsSlow(intervals):
     if len(intervals)<=1:
         return len(intervals)
     intervals.sort()
@@ -53,7 +54,46 @@ def generateTest(n):
 #print (minMeetingRooms(intervals))
 #intervals = [[7,10],[2,4]]
 #print (minMeetingRooms(intervals))
-intervals = generateTest(10000)
-print (intervals)
+#intervals = generateTest(10000)
+#print (intervals)
 #intervals = [[1, 28], [1, 29], [13, 28], [16, 29], [23, 31], [25, 45], [26, 48], [29, 44], [29, 54], [30, 34]]
-print (minMeetingRooms(intervals))
+#print (minMeetingRooms(intervals))
+
+def minMeetingRoomsMinHeap(intervals):
+    myList = []
+    intervals.sort()
+    heapq.heappush(myList,intervals[0][1])
+    count  = 1
+    for start,stop in intervals[1:]:
+        currentMin = myList[0]
+        if start>=currentMin:
+            heapq.heappop(myList)
+            heapq.heappush(myList,stop)
+        else:
+            # create new room
+            count+=1
+            heapq.heappush(myList,stop)
+            
+    return count
+#intervals = [[1, 28], [1, 29], [13, 28], [16, 29], [23, 31], [25, 45], [26, 48], [29, 44], [29, 54], [30, 34]]
+intervals = []
+#print (minMeetingRoomsMinHeap(intervals))
+
+def minMeetingByOverlap(intervals):
+    dictionary = {}
+    for start,stop in intervals:
+        if start not in dictionary:
+            dictionary[start]= 0
+        dictionary[start]+=1
+        if stop not in dictionary:
+            dictionary[stop]= 0
+        dictionary[stop]-=1
+    myList = sorted(dictionary)
+    currentRoom, minRoom = 0,0
+    for time in myList:
+        currentRoom+=dictionary[time]
+        minRoom= max(minRoom,currentRoom)
+    return minRoom
+#print (minMeetingByOverlap(intervals))
+    
+    
