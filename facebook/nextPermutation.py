@@ -4,7 +4,7 @@ Created on Thu Sep 19 21:29:47 2019
 
 @author: Huy Nguyen
 """
-import random
+#import random
 #31. Next Permutation
 #Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
 #
@@ -26,7 +26,7 @@ def nextPermutation(nums):
                 if nums[j]>nums[i-1] and currentMin>nums[j] :
                     rightmostIndex= j
                     currentMin = nums[j]
-            print (rightmostIndex,nums[rightmostIndex],i-1,nums[i-1])
+#            print (rightmostIndex,nums[rightmostIndex],i-1,nums[i-1])
             temp = nums[i-1]
             nums[i-1]= nums[rightmostIndex]
             nums[rightmostIndex]=temp

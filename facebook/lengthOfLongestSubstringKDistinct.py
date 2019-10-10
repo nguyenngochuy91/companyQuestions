@@ -39,6 +39,6 @@ def lengthOfLongestSubstringKDistinct(s: str, k: int) -> int:
             d[letter]+=1
         stop+=1
     return max(output,length)
-s ="a"
-k = 1
-print (lengthOfLongestSubstringKDistinct(s,k))
+#s ="a"
+#k = 1
+#print (lengthOfLongestSubstringKDistinct(s,k))

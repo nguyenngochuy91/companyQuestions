@@ -30,11 +30,11 @@ def isOneEditAway(w1,w2):
                 j+=1
             else:
                 return w1[i+1:]==w2[j:] or w2[j+1:]==w1[i:]
-        return True
+        return True # for case that is 1 empty and 1 of length 1, not going through the loop
 print (isOneEditAway("abcmef","abcef"))
 print (isOneEditAway("cat", "dog"))
 print (isOneEditAway("cat", "cats"))
 print (isOneEditAway("cat", "cut"))
 print (isOneEditAway("cat", "cast"))
 print (isOneEditAway("cat", "at"))
-print (isOneEditAway("cat", "act"))
+print (isOneEditAway("", "a"))
