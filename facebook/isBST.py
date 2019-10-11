@@ -56,16 +56,18 @@ def isValidBstPreorder(self, root: TreeNode) -> bool:
     
 def isValidBstPreorder1(self, root: TreeNode) -> bool:
 
-    def dfs(root,last):
+    def dfs(root,path):
         if not root:
             return True
         else:
-            checkL = dfs(root.left,last)
+            checkL = dfs(root.left,path)
             check  = True
+            last   = path[-1]
             if last!=None:
-                if root.val<=self.last:
+                if root.val<=last:
                     check= False
-            last   = root.val
-            checkR = dfs(root.right)
+            path.pop()
+            path.append(root.val)
+            checkR = dfs(root.right,path)
             return check and checkL and checkR
-    return dfs(root,None)
+    return dfs(root,[None])

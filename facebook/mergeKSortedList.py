@@ -39,7 +39,7 @@ def mergeKListsV1(self, lists: List[ListNode]) -> ListNode:
 
 def mergeKListsV2(self, lists: List[ListNode]) -> ListNode:
     h = [(l.val, idx) for idx, l in enumerate(lists) if l]
-    heapq.heapify(h)
+    heapq.heapify(h) # make it a mean heap by  value
     head = cur = ListNode(None)
     while h:
         val, idx = heapq.heappop(h)

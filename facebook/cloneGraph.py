@@ -12,23 +12,25 @@ class Node:
 # 133. Clone Graph
 #Given a reference of a node in a connected undirected graph, return a deep copy (clone) of the graph. 
 #Each node in the graph contains a val (int) and a list (List[Node]) of its neighbors.
-def cloneGraphDFS(node):
-    d = {}
-    def dfs(node):
-        if node:
-            newNode = Node(node.val,[])
-            d[node] = newNode
-            for neighbor in node.neighbors:
-                if neighbor not in d:
-                    newNeighbor = dfs(neighbor)
-                    d[neighbor]= newNeighbor
-                    newNode.neighbors.append(newNeighbor)
+def cloneGraphDFS(root):
+    dictionary = {}
+    def dfs(root):
+        if root: 
+            # time to create  a clone of root
+            newNode = Node(root.val,[])
+            dictionary[root] = newNode
+            # for each neighbor ouf root
+            for neighbor in root.neighbors:
+                # create a clone, if neighbor was not traverse
+                if neighbor not in dictionary:
+                    cloneNeighbor = dfs(neighbor) # return the clone node
+                # append this to our newNode neighbor
                 else:
-                    newNode.neighbors.append(d[neighbor])
+                    # alredy make a clone ,retrieve it
+                    cloneNeighbor= dictionary[neighbor]
+                newNode.neighbors.append(cloneNeighbor)
             return newNode
-    newNode = dfs(node)
-    return newNode
-    
+    return dfs(root)
 
 def cloneGraphLoop(node):
     queue = deque()
