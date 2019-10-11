@@ -44,6 +44,29 @@ def check(string):
     if "0" in string:
         return string in ["10","20"]
     return True
+def decodeForward(s):
+    if not s:
+        return 0
+    if s[0]=="0":
+        return 0
+    if len(s)==1:
+        return 1
+    arr= [0,0]
+    if check(s[0]):
+        arr[0]+=1
+    if check(s[1]): # "10"
+        arr[1]+=1
+    if check(s[0]+s[1]):
+        arr[1]+=1
+    for i in range(2,len(s)):
+        char = s[i]
+        val = 0
+        if check(char):
+            val+=arr[1]
+        if check(s[i-1]+char):
+            val+=arr[0]
+        arr[0],arr[1]= arr[1],val
+    return arr[1]
 
 #string = "12312731"
 #print (numDecodings(string))
