@@ -36,7 +36,7 @@ def removeInvalidParentheses(s: str):
                 # we check if we can ignore this
                 if left>0:
                     # this means we can choose to skip this
-                    dfs(left,right,currentList,index+1,correctLeft,correctRight)
+                    dfs(left-1,right,currentList,index+1,correctLeft,correctRight)
                 # we will include it if and only if correctLeft greater than 0
                 if correctLeft>0:
                     currentList.append("(")
@@ -44,8 +44,9 @@ def removeInvalidParentheses(s: str):
                     currentList.pop()
             elif currentChar==")":
                 if right>0:
+#                    this means we can choose to skip this
                     dfs(left,right-1,currentList,index+1,correctLeft,correctRight)
-                if correctRight>0 and correctLeft<correctRight:
+                if correctRight>0 and correctLeft<correctRight: # make sure what we have is still valid
                     currentList.append(")")
                     dfs(left,right,currentList,index+1,correctLeft,correctRight-1)
                     currentList.pop()

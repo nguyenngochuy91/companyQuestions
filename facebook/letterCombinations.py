@@ -11,18 +11,20 @@ Created on Thu Sep 26 13:57:31 2019
 #from the mapping.
 mapping = {'1': ['A', 'B', 'C'], '2': ['D', 'E', 'F'], '3': ['G', 'H', 'I'], '4': ['J', 'K', 'L'] }
 def phone_permute_DFS(digits, mapping):
+    if not digits:
+        return []
     res = []
-    def dfs(digits,index,path):
+    mapping = {'2': 'ABC', '3': 'DEF', '4': 'GHI', '5': 'JKL' ,
+              '6':'MNO','7': 'PQRS','8':'TUV','9':'WXYZ'}
+    def dfs(index,path):
         if index==len(digits):
             res.append("".join(path))
-        elif index<len(digits):
-            num = digits[index]
-            for letter in mapping[num]:
-                path.append(letter)
-                dfs(digits,index+1,path)
+        else:
+            for letter in mapping[digits[index]]:
+                path.append(letter.lower())
+                dfs(index+1,path)
                 path.pop()
-                
-    dfs(digits,0,[])
+    dfs(0,[])
     return res
 def phone_permute_iteration(digits,mapping):
     res = [""]

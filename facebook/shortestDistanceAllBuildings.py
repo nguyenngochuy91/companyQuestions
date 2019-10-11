@@ -13,6 +13,7 @@ Created on Sun Sep 22 23:06:37 2019
 #Each 1 marks a building which you cannot pass through.
 #Each 2 marks an obstacle which you cannot pass through.
 def shortestDistance(grid):
+    
     return
     
 grid = [[1,0,2,0,1],[0,0,0,0,0],[0,0,1,0,0]]
