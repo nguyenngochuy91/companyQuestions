@@ -1,40 +1,44 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Oct  8 15:34:55 2019
+Created on Thu Oct 17 22:13:47 2019
 
 @author: huyn
 """
+def maxOverlapping(intervals,start,stop):
+    dictionary = {i:[0,0] for i in range(start,stop)}
+    countOverlapping = 0
+    res = None
+    maxOverlap = 0
+    
+    for startIntewqrval,stopInterval in intervals:
+        dictionary[startIntewqrval][0]+= 1
+        dictionary[stopInterval][1]+= 1
+            
 
-#Amazing Number
-#Define amazing number as: its value is less than or equal to its index. Given a 
-#circular array, find the starting position, such that the total number of amazing numbers in the array is maximized.
-#Example 1: 0, 1, 2, 3
-#Ouptut: 0. When starting point at position 0, all the elements in the array are equal to 
-#its index. So all the numbers are amazing number.
-#Example 2: 1, 0 , 0
-#Output: 1. When starting point at position 1, the array becomes 0, 0, 1. All the elements are amazing number.
-#If there are multiple positions, return the smallest one.
-#
-#should get a solution with time complexity less than O(N^2)
-def getAmazingNumberNaive(arr):
-    size = len(arr)
-    maxCount = 0
-    for i in range(size):
-        starting =i
-        count = 0
-        for j in range(size):
-#            print (starting,j)
-            if j>=arr[starting%size]:
-#                print ("index:",j, "num:",arr[starting%size])
-                count+=1
-            starting+=1
-        maxCount= max(maxCount,count)
-    return maxCount
-arr =[0,1,2,3]
+    for i in range(start,stop):
+        countOverlapping+= dictionary[i][0]
+        if countOverlapping > maxOverlap:
+            maxOverlap = countOverlapping
+            res = i 
+        countOverlapping-= dictionary[i][1]
 
-print (getAmazingNumberNaive(arr))
-#arr=[3,2,1,0]
-#
-#print (getAmazingNumberNaive(arr))
-#arr = [4]
-#print (getAmazingNumberNaive(arr))
+    return res
+
+def computeIntervals(array):
+    size = len(array)
+    intervals = []
+    for index,num in enumerate(array):
+        if num < size:
+            if index >= num: # itself is a good one
+                intervals.append([0,index-num])
+                if index<size-1:
+                    intervals.append([index+1,size-1])
+            else: # if index < num, we have to shift 0 to left, which means our 0 have to be from the right
+                # have to shift 0 to the left the amount of num-index, 
+                start = index+1
+                # we check how many to the right can we do it, basically
+                stop = size - (num-index)
+                intervals.append([start,stop])
+                
+        print (intervals)
+    return intervals
