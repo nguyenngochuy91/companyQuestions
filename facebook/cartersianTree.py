@@ -61,3 +61,48 @@ tree = cartersianTree(arr)
 root = tree.root
 root.inorder(root)
 # O(nlogn),O(n) space
+class segmentNode:
+    def __init__(self,val,start,stop,left=None,right=None):
+        self.start = start
+        self.stop  = stop
+        self.val   = val
+        self.left  = left
+        self.right = right
+class segmentTree:
+    def __init__(self,arr):
+        self.root = self.initialize(arr,0,len(arr)-1)
+    def initialize(self,nums,start,stop):
+        if start == stop:
+            node = segmentNode(nums[start],start,stop)
+            return node
+        elif start<stop:
+            mid = (start+stop)//2
+            left = self.initialize(nums,start,mid)
+            right = self.initialize(nums,mid+1,stop)
+            node  = segmentNode(left.val+right.val,start,stop,left,right)
+            return node
+    def getMin(self,i,j):
+        root = self.root
+        def dfs(root,i,j):
+            start,stop = root.start,root.stop
+            if i== start and j == stop:
+                return root.val,start
+            else:
+                mid = (start+stop)//2
+                val = 0
+                # check if i>mid
+                if i>mid:
+                    val,index = dfs(root.right,i,j)
+                elif i<=mid:
+                    if j<=mid:
+                        val,index =dfs(root.left,i,j)
+                    else:
+                        # this means we have to search bothway
+                        minLeft,indexLeft  = dfs(root.left,i,mid)
+                        minRight,indexRight = dfs(root.right,mid+1,j)
+                        if minLeft<= minRight:
+                            val,index = minLeft,indexLeft
+                        else:
+                            val,index = minRight,indexRight
+                return val,index
+        return dfs(root,i,j)

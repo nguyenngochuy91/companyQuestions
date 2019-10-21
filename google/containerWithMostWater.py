@@ -14,12 +14,15 @@ Created on Sun Oct 20 03:13:31 2019
 #Note: You may not slant the container and n is at least 2.\
 from typing import List
 def maxArea(height: List[int]) -> int:
-    # the idea is to find 2 point that has maximum width (x2-x1)*min(y1,y2)
-    # basically, our problem can be solve using f(0,n) = max(f(0,n-1),min(y_n-1,y_n),xn*min*(y_0,y_n))
-    currentMin = min(height[:2])
-    for i in range(2,len(height)):
-        currentMin = max(currentMin,min(height[i],height[i-1]),min(height[i],height[0])*i)
-    return currentMin
+    i,j = 0 ,len(height)-1
+    maxA = 0
+    while i <j:
+        maxA = max(maxA,(j-i)*min(height[i],height[j]))
+        if height[i]<height[j]:
+            i+=1
+        else:
+            j-=1
+    return maxA
 
 height = [1,8,6,2,5,4,8,3,7]
 print (maxArea(height))
