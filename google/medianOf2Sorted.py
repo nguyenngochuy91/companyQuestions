@@ -9,6 +9,9 @@ Created on Wed Oct 23 14:09:08 2019
 from typing import List
 import random
 def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+    size1 = len(nums1)
+    size2 = len(nums2)
+    
     return
 def generate(n):
     arr = []
