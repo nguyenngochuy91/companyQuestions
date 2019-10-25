@@ -14,6 +14,16 @@ Created on Thu Oct 24 03:17:42 2019
 #
 #1 ≤ n ≤ 1000
 #1 ≤ m ≤ min(50, n)
+import random
 from typing import List
 def splitArray(nums: List[int], m: int) -> int:
     return
+
+def generate(n):
+    arr = []
+    for i in range(n):
+        arr.append(random.randint(0,10))
+    return arr
+
+arr = generate(10)
+print (arr)

@@ -46,3 +46,4 @@ def findStrobogrammatic(n: int) :
                     path.pop()
     dfs([],0)
     return [item for item in res]    
+print (findStrobogrammatic(5))
