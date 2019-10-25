@@ -19,18 +19,40 @@ class Solution(object):
         """
         start = list(start)
         end = list(end)
-        move = {"XL":"LX","RX":"XR"}
-        for i in range(len(start)-1):
-            first = "".join(start[i:i+2])
-            second = "".join(end[i:i+2])
-            if first == second:
-                continue
-            else:
-                if first not in move:
-                    return False
-                if move[first] == second:
-                    start[i] = second[0]
-                    start[i+1] = second[1]
-                else:
-                    return False
-        return True
+        right = {"XL":"LX","RX":"XR"}
+        left  = {"LX":"XL","XR":"RX"} # because for case like XXL, we have to transform from reverse
+        def dfs(index):
+            if index == len(start):
+                return True
+            elif index < len(start):
+                check1 = False
+                check2 = False
+                if start[index] == end[index]:
+                    check1 = dfs(index+1)
+                if index < len(start)-1:
+                    string1 = start[index]+start[index+1]
+                    string2 = end[index]+end[index+1]
+                    if string1 in right:
+                        if right[string1] == string2:
+                            start[index],start[index+1] = start[index+1],start[index]
+                            check2 = check2 or dfs(index+2)
+                            start[index],start[index+1] = start[index+1],start[index]
+                        elif right[string1][0] == string2[0]:
+                            start[index],start[index+1] = start[index+1],start[index]
+                            check2 = check2 or dfs(index+1)
+                            start[index],start[index+1] = start[index+1],start[index]
+                    elif string2 in left:
+                        if left[string2] == string1:
+                            end[index],end[index+1] = end[index+1],end[index]
+                            check2 = check2 or dfs(index+2)
+                            end[index],end[index+1] = end[index+1],end[index]
+                        elif left[string2][0] == string1[0]:
+                            end[index],end[index+1] = end[index+1],end[index]
+                            check2 = check2 or dfs(index+1)
+                            end[index],end[index+1] = end[index+1],end[index]                        
+                return check1 or check2
+        return dfs(0)
+start = "XXXL"
+end   = "LXXX"
+mySolution = Solution()
+print (mySolution.canTransform(start,end))
