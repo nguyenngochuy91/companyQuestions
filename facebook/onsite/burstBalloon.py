@@ -15,6 +15,7 @@ Created on Fri Oct 25 17:29:59 2019
 from typing import List
 class Solution:
     def maxCoins(self, nums: List[int]) -> int:
+        
         return
         
 nums = [3,1,5,8]
