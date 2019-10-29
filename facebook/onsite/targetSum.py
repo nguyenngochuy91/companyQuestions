@@ -35,14 +35,24 @@ class Solution(object):
         :type S: int
         :rtype: int
         """
-        self.count = 0
+        dp = {}
         def dfs(index,acc,S):
             if index == len(nums):
                 if acc == S:
-                    self.count += 1
+                    return 1
+                else:
+                    return 0 
             else:
+                if index in dp:
+                    if acc in dp[index]:
+                        return dp[index][acc]
                 num = nums[index]
-                dfs(index+1, acc+num,S)
-                dfs(index+1, acc-num,S)
-        dfs(0,0,S)
-        return self.count
+                first = dfs(index+1, acc+num,S)
+                second = dfs(index+1, acc-num,S)
+                if index not in dp:
+                    dp[index] = {}
+                if acc not in dp[index]:
+                    dp[index][acc] = first + second
+                return first + second
+        return dfs(0,0,S)
+
