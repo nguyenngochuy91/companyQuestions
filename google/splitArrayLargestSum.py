@@ -17,6 +17,7 @@ Created on Thu Oct 24 03:17:42 2019
 import random
 from typing import List
 def splitArray(nums: List[int], m: int) -> int:
+    
     return
 
 def generate(n):

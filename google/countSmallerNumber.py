@@ -10,6 +10,11 @@ Created on Wed Oct 23 03:46:01 2019
 #The counts array has the property where counts[i] is the number of smaller elements to the right of nums[i].
 import random
 from typing import List
+
+class SegmentTree:
+    def __init__(self,array):
+        return
+
 def countSmaller(nums: List[int]) -> List[int]:
     return
 def generate(n):
