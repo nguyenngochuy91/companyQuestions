@@ -47,4 +47,5 @@ class Solution(object):
                     if first in countT:
                         if d[first] <countT[first]:
                             hitting-=1
+            
         return index,length         
