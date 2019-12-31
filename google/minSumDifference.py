@@ -41,7 +41,7 @@ def minSumDifference_topDown(nums):
         return dp[index][currentSum]
     dfs(0,0,0)
     return dp[0][0]
-#print("Can partition: " + str(minSumDifference_topDown([1, 2, 3, 9])))
-#print("Can partition: " + str(minSumDifference_topDown([1, 2, 7, 1, 5])))
-#print("Can partition: " + str(minSumDifference_topDown([1, 3, 100, 4])))
+print("Can partition: " + str(minSumDifference_topDown([1, 2, 3, 9])))
+print("Can partition: " + str(minSumDifference_topDown([1, 2, 7, 1, 5])))
+print("Can partition: " + str(minSumDifference_topDown([1, 3, 100, 4])))
     
