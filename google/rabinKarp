@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Dec 31 08:52:52 2019
+
+@author: huynguyen
+"""
+
+
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        if not needle:
+            return 0
+        if needle not in haystack:
+            return -1
+        return haystack.index(needle)
+    def rabinKarp(self, haystack: str, needle: str) -> int:
+        return

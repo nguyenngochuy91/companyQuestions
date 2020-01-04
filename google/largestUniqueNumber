@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Dec 31 08:46:24 2019
+
+@author: huynguyen
+"""
+
+
+# 1133. Largest Unique Number
+
+# Given an array of integers A, return the largest integer that only occurs once.
+
+# If no integer occurs once, return -1.
+from typing import List
+class Solution:
+    def largestUniqueNumber(self, A: List[int]) -> int:
+        if len(A)== 1:
+            return A[0]
+        A.sort()
+        count = 1 
+        current = A[-1]
+        for i in range(len(A)-2,-1,-1):
+            num = A[i]
+            if num!= current:
+                if count == 1:
+                    return current
+                else:
+                    current = num
+                    count = 1
+            else:
+                count +=1 
+        if count == 1:
+            return current
+        return -1
+                
+        
