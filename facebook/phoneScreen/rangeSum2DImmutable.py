@@ -43,3 +43,6 @@ class NumMatrix:
             else:
                 return self.arr[row2][col2]- self.arr[row2][col1-1]-self.arr[row1-1][col2]+self.arr[row1-1][col1-1]      
         return
+
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+num = NumMatrix(matrix)
