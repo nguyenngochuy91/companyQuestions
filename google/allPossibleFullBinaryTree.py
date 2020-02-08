@@ -23,4 +23,5 @@ class TreeNode:
 
 class Solution:
     def allPossibleFBT(self, N: int) -> List[TreeNode]:
+        
         return
