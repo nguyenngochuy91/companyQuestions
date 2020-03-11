@@ -17,4 +17,24 @@ Created on Tue Mar  3 20:45:26 2020
 from typing import List
 class Solution:
     def findPermutation(self, s: str) -> List[int]:
-        return
+        res = [i+1 for i in range(len(s)+1)]
+        found = False
+        index = 0
+        while index<len(s):
+            letter = s[index]
+            while letter =="D":
+                if not found:
+                    found = True
+                    start = index
+                    stop = index
+                else:
+                    stop = index
+                index+=1
+                if index == len(s):
+                    break
+                letter = s[index]
+            if found:
+                res[start:stop+2] = res[start:stop+2][::-1]
+                found = False
+            index+=1
+        return res
