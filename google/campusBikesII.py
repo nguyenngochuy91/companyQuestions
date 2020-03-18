@@ -10,10 +10,11 @@ class Solution:
     def assignBikes(self, workers: List[List[int]], bikes: List[List[int]]) -> int:
         graph = {}
         for i in range(len(workers)):
-            worker = workers[i]
+            worker = workers[i] 
             graph[i] = {}
             for j in range(len(bikes)):
                 bike = bikes[j]
-                distance = (worker[0]-bike[0])**2 + (worker[1] - biker[1])**2
-                graph[i][j] = distance
+                d = (worker[0] - bike[0])**2 + (worker[1] -bike[1])**2
+                graph[i][j] = d
+        dp = {}
         
