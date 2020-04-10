@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Apr  9 20:14:41 2020
+
+@author: huynguyen
+"""
+"""In LeetCode Store, there are some kinds of items to sell. Each item has a price.
+
+However, there are some special offers, and a special offer consists of one or more different kinds of items with a sale price.
+
+You are given the each item's price, a set of special offers, and the number we need to buy for each item. 
+The job is to output the lowest price you have to pay for exactly certain items as given, where you could make optimal 
+use of the special offers.
+
+Each special offer is represented in the form of an array, the last number represents the price you need to pay for 
+this special offer, other numbers represents how many specific items you could get if you buy this offer.
+
+You could use any of special offers as many times as you want."""
+from typing import List
+class Solution:
+    def shoppingOffers(self, price: List[int], special: List[List[int]], needs: List[int]) -> int:
+        
+        return
